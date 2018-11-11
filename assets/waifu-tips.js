@@ -139,8 +139,8 @@ function initModel(waifuPath, type) {
     $(".waifu-tool").css("font-size",live2d_settings.waifuToolFont);
     $(".waifu-tool span").css("line-height",live2d_settings.waifuToolLine);
     
-    if (live2d_settings.waifuEdgeSide[0] == 'left') $(".waifu").css("left",live2d_settings.waifuEdgeSide[1]);
-    else if (live2d_settings.waifuEdgeSide[0] == 'right') $(".waifu").css("right",live2d_settings.waifuEdgeSide[1]);
+    if (live2d_settings.waifuEdgeSide[0] == 'left') $(".waifu").css("left",live2d_settings.waifuEdgeSide[1]+'px');
+    else if (live2d_settings.waifuEdgeSide[0] == 'right') $(".waifu").css("right",live2d_settings.waifuEdgeSide[1]+'px');
     
     if (live2d_settings.waifuMinWidth != 'disable') $(window).resize(function() {
         $(window).width() <= Number(live2d_settings.waifuMinWidth.replace('px','')) ? $(".waifu").hide() : $(".waifu").show();
