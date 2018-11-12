@@ -1,4 +1,4 @@
-# Live2D Demo
+# Live2D demo
 
 Live2D 看板娘插件 (https://www.fghrsh.net/post/123.html) 的前端 HTML 源码
 
@@ -134,6 +134,7 @@ try {
 
 - 模型切换模式
 
+  - `live2d_settings['modelStorage']`，记录 ID (刷新后恢复)，`true` | `false`
   - `live2d_settings['modelRandMode']`，模型切换，可选 `'rand'` (随机) | `'switch'` (顺序)
   - `live2d_settings['modelTexturesRandMode']`，材质切换，可选 `'rand'` | `'switch'`
 

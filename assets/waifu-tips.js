@@ -3,8 +3,8 @@ window.live2d_settings = Array(); /*
     く__,.ヘヽ.　　　　/　,ー､ 〉
     　　　　　＼ ', !-─‐-i　/　/´
     　　　 　 ／｀ｰ'　　　 L/／｀ヽ､            Live2D 看板娘 参数设置
-    　　 　 /　 ／,　 /|　 ,　 ,　　　 ',                                           Version 1.4
-    　　　ｲ 　/ /-‐/　ｉ　L_ ﾊ ヽ!　 i                            Update 2018.11.10
+    　　 　 /　 ／,　 /|　 ,　 ,　　　 ',                                           Version 1.4.2
+    　　　ｲ 　/ /-‐/　ｉ　L_ ﾊ ヽ!　 i                            Update 2018.11.12
     　　　 ﾚ ﾍ 7ｲ｀ﾄ　 ﾚ'ｧ-ﾄ､!ハ|　 |  
     　　　　 !,/7 '0'　　 ´0iソ| 　 |　　　
     　　　　 |.从"　　_　　 ,,,, / |./ 　 |             网页添加 Live2D 看板娘
@@ -39,6 +39,7 @@ live2d_settings['canTurnToHomePage']    = true;         // 显示 返回首页  
 live2d_settings['canTurnToAboutPage']   = true;         // 显示 跳转关于页  按钮，可选 true(真), false(假)
 
 // 模型切换模式
+live2d_settings['modelStorage']         = true;         // 记录 ID (刷新后恢复)，可选 true(真), false(假)
 live2d_settings['modelRandMode']        = 'switch';     // 模型切换，可选 'rand'(随机), 'switch'(顺序)
 live2d_settings['modelTexturesRandMode']= 'rand';       // 材质切换，可选 'rand'(随机), 'switch'(顺序)
 
@@ -63,14 +64,13 @@ live2d_settings['waifuDraggable']       = 'disable';    // 拖拽样式，例如
 live2d_settings['waifuDraggableRevert'] = true;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
 
 // 其他杂项设置
-live2d_settings['l2dVersion']           = '1.4';        // 当前版本
-live2d_settings['l2dVerDate']           = '2018.11.10'; // 版本更新日期
+live2d_settings['l2dVersion']           = '1.4.2';        // 当前版本
+live2d_settings['l2dVerDate']           = '2018.11.12'; // 版本更新日期
 live2d_settings['homePageUrl']          = 'auto';       // 主页地址，可选 'auto'(自动), '{URL 网址}'
 live2d_settings['aboutPageUrl']         = 'https://www.fghrsh.net/post/123.html';   // 关于页地址, '{URL 网址}'
 live2d_settings['screenshotCaptureName']= 'live2d.png'; // 看板娘截图文件名，例如 'live2d.png'
 
 /****************************************************************************************************/
-
 
 String.prototype.render = function(context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
@@ -187,19 +187,19 @@ function initModel(waifuPath, type) {
     var modelId = localStorage.getItem('modelId');
     var modelTexturesId = localStorage.getItem('modelTexturesId');
     
-    if (modelId == null) {
+    if (!live2d_settings.modelStorage || modelId == null) {
         var modelId = live2d_settings.modelId;
         var modelTexturesId = live2d_settings.modelTexturesId;
     } loadModel(modelId, modelTexturesId);
 }
 
 function loadModel(modelId, modelTexturesId) {
-    localStorage.setItem('modelId', modelId);
-    
-    if (modelTexturesId === undefined) modelTexturesId = 0;
-    localStorage.setItem('modelTexturesId', modelTexturesId);
-    
-    loadlive2d('live2d', live2d_settings.modelAPI+'get/?id='+modelId+'-'+modelTexturesId, (live2d_settings.showF12Status ? console.log('[Status]','live2d','模型',modelId+'-'+modelTexturesId,'加载完成'):null));
+    if (live2d_settings.modelStorage) {
+        localStorage.setItem('modelId', modelId);
+        
+        if (modelTexturesId === undefined) modelTexturesId = 0;
+        localStorage.setItem('modelTexturesId', modelTexturesId);
+    } loadlive2d('live2d', live2d_settings.modelAPI+'get/?id='+modelId+'-'+modelTexturesId, (live2d_settings.showF12Status ? console.log('[Status]','live2d','模型',modelId+'-'+modelTexturesId,'加载完成'):null));
 }
 
 function loadTipsMessage(result) {
