@@ -181,7 +181,7 @@ function initModel(waifuPath, type) {
     if (!live2d_settings.canSwitchHitokoto) $('.waifu-tool .fui-chat').hide();
     if (!live2d_settings.canTakeScreenshot) $('.waifu-tool .fui-photo').hide();
     if (!live2d_settings.canTurnToHomePage) $('.waifu-tool .fui-home').hide();
-    if (!live2d_settings.canTurnToAboutPage) $('.waifu-tool .fui-circle').hide();
+    if (!live2d_settings.canTurnToAboutPage) $('.waifu-tool .fui-info-circle').hide();
 
     if (waifuPath === undefined) waifuPath = '';
     var modelId = localStorage.getItem('modelId');
