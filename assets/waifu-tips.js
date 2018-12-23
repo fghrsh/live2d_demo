@@ -202,7 +202,7 @@ function loadModel(modelId, modelTexturesId) {
 }
 
 function loadTipsMessage(result) {
-    localStorage.setItem('waifu-tips', result);
+    window.waifu_tips = result;
     
     $.each(result.mouseover, function (index, tips){
         $(document).on("mouseover", tips.selector, function (){
@@ -256,7 +256,7 @@ function loadTipsMessage(result) {
         window.setTimeout(function() {$('.waifu').hide();}, 1300);
     });
     
-    function showWelcomeMessage(result) {
+    window.showWelcomeMessage = function(result) {
         var text;
         if (window.location.href == live2d_settings.homePageUrl) {
             var now = (new Date()).getHours();
