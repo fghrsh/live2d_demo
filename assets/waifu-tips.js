@@ -254,7 +254,7 @@ function loadTipsMessage(result) {
         window.setTimeout(function() {$('.waifu').hide();}, 1300);
     });
     
-    if (live2d_settings.showWelcomeMessage) {
+    function showWelcomeMessage() {
         var text;
         if (window.location.href == live2d_settings.homePageUrl) {
             var now = (new Date()).getHours();
@@ -288,7 +288,7 @@ function loadTipsMessage(result) {
             } else text = referrer_message.none[0] + document.title.split(referrer_message.none[2])[0] + referrer_message.none[1];
         }
         showMessage(text, 6000);
-    }
+    } if (live2d_settings.showWelcomeMessage) showWelcomeMessage();
     
     var waifu_tips = result.waifu;
     
