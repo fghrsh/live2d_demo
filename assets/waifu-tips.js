@@ -202,6 +202,8 @@ function loadModel(modelId, modelTexturesId) {
 }
 
 function loadTipsMessage(result) {
+    localStorage.setItem('waifu-tips', result);
+    
     $.each(result.mouseover, function (index, tips){
         $(document).on("mouseover", tips.selector, function (){
             var text = getRandText(tips.text);
@@ -254,7 +256,7 @@ function loadTipsMessage(result) {
         window.setTimeout(function() {$('.waifu').hide();}, 1300);
     });
     
-    function showWelcomeMessage() {
+    function showWelcomeMessage(result) {
         var text;
         if (window.location.href == live2d_settings.homePageUrl) {
             var now = (new Date()).getHours();
@@ -288,7 +290,7 @@ function loadTipsMessage(result) {
             } else text = referrer_message.none[0] + document.title.split(referrer_message.none[2])[0] + referrer_message.none[1];
         }
         showMessage(text, 6000);
-    } if (live2d_settings.showWelcomeMessage) showWelcomeMessage();
+    } if (live2d_settings.showWelcomeMessage) showWelcomeMessage(result);
     
     var waifu_tips = result.waifu;
     
