@@ -290,7 +290,7 @@ function loadTipsMessage(result) {
             } else text = referrer_message.none[0] + document.title.split(referrer_message.none[2])[0] + referrer_message.none[1];
         }
         showMessage(text, 6000);
-    } if (live2d_settings.showWelcomeMessage) showWelcomeMessage(result);
+    }; if (live2d_settings.showWelcomeMessage) showWelcomeMessage(result);
     
     var waifu_tips = result.waifu;
     
