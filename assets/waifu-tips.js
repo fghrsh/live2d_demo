@@ -142,9 +142,8 @@ function initModel(waifuPath, type) {
     if (live2d_settings.waifuEdgeSide[0] == 'left') $(".waifu").css("left",live2d_settings.waifuEdgeSide[1]+'px');
     else if (live2d_settings.waifuEdgeSide[0] == 'right') $(".waifu").css("right",live2d_settings.waifuEdgeSide[1]+'px');
     
-    if (live2d_settings.waifuMinWidth != 'disable') $(window).resize(function() {
-        $(window).width() <= Number(live2d_settings.waifuMinWidth.replace('px','')) ? $(".waifu").hide() : $(".waifu").show();
-    });
+    function waifuResize() { $(window).width() <= Number(live2d_settings.waifuMinWidth.replace('px','')) ? $(".waifu").hide() : $(".waifu").show(); }
+    if (live2d_settings.waifuMinWidth != 'disable') { waifuResize(); $(window).resize(waifuResize()); }
     
     try {
         if (live2d_settings.waifuDraggable == 'axis-x') $(".waifu").draggable({ axis: "x", revert: live2d_settings.waifuDraggableRevert });
