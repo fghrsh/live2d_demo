@@ -192,12 +192,13 @@ function initModel(waifuPath, type) {
     } loadModel(modelId, modelTexturesId);
 }
 
-function loadModel(modelId, modelTexturesId) {
+function loadModel(modelId, modelTexturesId=0) {
     if (live2d_settings.modelStorage) {
         localStorage.setItem('modelId', modelId);
-        
-        if (modelTexturesId === undefined) modelTexturesId = 0;
         localStorage.setItem('modelTexturesId', modelTexturesId);
+    } else {
+        sessionStorage.setItem('modelId', modelId);
+        sessionStorage.setItem('modelTexturesId', modelTexturesId);
     } loadlive2d('live2d', live2d_settings.modelAPI+'get/?id='+modelId+'-'+modelTexturesId, (live2d_settings.showF12Status ? console.log('[Status]','live2d','模型',modelId+'-'+modelTexturesId,'加载完成'):null));
 }
 
@@ -295,7 +296,7 @@ function loadTipsMessage(result) {
     var waifu_tips = result.waifu;
     
     function loadOtherModel() {
-        var modelId = localStorage.getItem('modelId');
+        var modelId = modelStorageGetItem('modelId');
         var modelRandMode = live2d_settings.modelRandMode;
         
         $.ajax({
@@ -312,8 +313,8 @@ function loadTipsMessage(result) {
     }
     
     function loadRandTextures() {
-        var modelId = localStorage.getItem('modelId');
-        var modelTexturesId = localStorage.getItem('modelTexturesId');
+        var modelId = modelStorageGetItem('modelId');
+        var modelTexturesId = modelStorageGetItem('modelTexturesId');
         var modelTexturesRandMode = live2d_settings.modelTexturesRandMode;
         
         $.ajax({
@@ -328,6 +329,8 @@ function loadTipsMessage(result) {
             }
         });
     }
+    
+    function modelStorageGetItem(key) { return live2d_settings.modelStorage ? localStorage.getItem(key) : sessionStorage.getItem(key); }
     
     /* 检测用户活动状态，并在空闲时显示一言 */
     if (live2d_settings.showHitokoto) {
