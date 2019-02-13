@@ -14,19 +14,20 @@ Live2D 看板娘插件 (https://www.fghrsh.net/post/123.html) 的前端 HTML 源
 ### 目录结构
 
 ```shell
-│  autoload_demo.html       // 使用 autoload.js 的 demo
-│  demo.html                // 使用 常规方式引入 的 demo
+│  demo1-default.html       // 常规引用 Demo
+│  demo2-autoload.html      // autoload.js Demo
+│  demo3-waifu-tips.html    // 内置 waifu-tips Demo
 │
 └─assets
-        autoload.js                     // 自动批量加载
+        autoload.js                     // 自动异步加载
         flat-ui-icons-regular.eot       // Flat UI 字体
         flat-ui-icons-regular.svg       // Flat UI 字体
         flat-ui-icons-regular.ttf       // Flat UI 字体
         flat-ui-icons-regular.woff      // Flat UI 字体
         live2d.js                       // Live2D 核心
-        waifu-tips.js                   // 看板娘 加载 JS
-        waifu-tips.json                 // 提示语 配置文件
-        waifu.css                       // 看板娘 样式表
+        waifu-tips.js                   // Live2D 看板娘 扩展
+        waifu-tips.json                 // Live2D 看板娘 提示语
+        waifu.css                       // Live2D 看板娘 样式表
 ```
 
 ### 食用方法
