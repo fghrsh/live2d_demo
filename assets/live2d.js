@@ -3981,11 +3981,18 @@ default = o;
 	}), i.
 default = r;
 	var o = e(2);
+	var requestCache = {};
 	r.prototype.loadBytes = function(t, i) {
+		// Cache 相同的请求，减少请求数量
+		if (requestCache[t] !== undefined) {
+			i(requestCache[t]);
+			return;
+		}
 		var e = new XMLHttpRequest;
 		e.open("GET", t, !0), e.responseType = "arraybuffer", e.onload = function() {
 			switch (e.status) {
 			case 200:
+				requestCache[t] = e.response;
 				i(e.response);
 				break;
 			default:
